@@ -116,6 +116,11 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `link_comment_article` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+-- Blog Update : nombre de vues par article
+ALTER TABLE `article`
+ADD `view_count` smallint unsigned NOT NULL AFTER `content`;
+-- l'option NOT NULL fait que chaque article existant en base aura pour valeur 0, ce qui nous convient
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
