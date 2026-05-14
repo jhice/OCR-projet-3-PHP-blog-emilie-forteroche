@@ -121,6 +121,21 @@ ALTER TABLE `article`
 ADD `view_count` smallint unsigned NOT NULL AFTER `content`;
 -- l'option NOT NULL fait que chaque article existant en base aura pour valeur 0, ce qui nous convient
 
+-- Attention une valeur par défaut de 0 est nécessaire pour les nouveaux articles
+ALTER TABLE `article`
+CHANGE `view_count` `view_count` smallint unsigned NOT NULL DEFAULT '0' AFTER `content`;
+
+-- faisons de même pour stocker le nombre de commentaires
+-- nous calculerons le nombre à chaque nouveau commentaire, plus efficace que de le faire à chaque affichage de la page
+ALTER TABLE `article`
+ADD `comment_count` smallint unsigned NOT NULL DEFAULT '0' AFTER `view_count`;
+-- NULLABLE (pour la commande de mise à jour SQL)
+ALTER TABLE `article`
+CHANGE `comment_count` `comment_count` smallint unsigned NULL DEFAULT '0' AFTER `view_count`;
+
+-- Met à jour le nombre de commentaires des articles existants
+UPDATE article SET comment_count = (SELECT count(*) FROM comment WHERE id_article=article.id GROUP BY id_article);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

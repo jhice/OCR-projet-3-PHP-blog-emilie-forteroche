@@ -41,6 +41,9 @@ class CommentController
             throw new Exception("Une erreur est survenue lors de l'ajout du commentaire.");
         }
 
+        // On met à jour le nombre de commentaires
+        $articleManager->updateCommentCount($article);
+
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
     }

@@ -105,4 +105,17 @@ class ArticleManager extends AbstractEntityManager
             'id' => $article->getId()
         ]);
     }
+
+    /**
+     * Modifie le compteur de commentaires d'un article.
+     * @param Article $article : l'article à modifier.
+     * @return void
+     */
+    public function updateCommentCount(Article $article): void
+    {
+        $sql = "UPDATE article SET comment_count = (SELECT count(*) FROM comment WHERE id_article = :id) WHERE article.id = :id;";
+        $this->db->query($sql, [
+            'id' => $article->getId()
+        ]);
+    }
 }

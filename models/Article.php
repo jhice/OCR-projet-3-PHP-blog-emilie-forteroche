@@ -9,6 +9,8 @@
     private int $idUser;
     private string $title = "";
     private string $content = "";
+    private int $viewCount = 0;
+    private ?int $commentCount = 0;
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
 
@@ -104,12 +106,12 @@
     }
 
     /**
-     * Setter pour la date de mise à jour. Si la date est une string, on la convertit en DateTime.
-     * @param string|DateTime $dateUpdate
+     * Setter pour la date de mise à jour. Si la date est une string, on la convertit en DateTime. Peut être null pour un nouvel article.
+     * @param null|string|DateTime $dateUpdate
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé.
      */
-    public function setDateUpdate(string|DateTime $dateUpdate, string $format = 'Y-m-d H:i:s') : void 
+    public function setDateUpdate(null|string|DateTime $dateUpdate, string $format = 'Y-m-d H:i:s') : void 
     {
         if (is_string($dateUpdate)) {
             $dateUpdate = DateTime::createFromFormat($format, $dateUpdate);
@@ -126,5 +128,50 @@
     public function getDateUpdate() : ?DateTime 
     {
         return $this->dateUpdate;
+    }
+
+    /**
+     * Get the value of viewCount
+     *
+     * @return int
+     */
+    public function getViewCount(): int
+    {
+        return $this->viewCount;
+    }
+
+    /**
+     * Set the value of viewCount
+     *
+     * @param int $viewCount
+     *
+     * @return void
+     */
+    public function setViewCount(int $viewCount): void
+    {
+        $this->viewCount = $viewCount;
+    }
+
+    /**
+     * Get the value of commentCount
+     *
+     * @return int
+     */
+    public function getCommentCount(): ?int
+    {
+        // on retourne la valeur ou 0 si null
+        return $this->commentCount ?? 0;
+    }
+
+    /**
+     * Set the value of commentCount
+     *
+     * @param int $commentCount
+     *
+     * @return void
+     */
+    public function setCommentCount(?int $commentCount): void
+    {
+        $this->commentCount = $commentCount;
     }
  }

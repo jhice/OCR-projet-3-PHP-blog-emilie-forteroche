@@ -37,7 +37,7 @@
     </main>
     
     <footer>
-        <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
+        <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a><?php if(isset($_SESSION['user'])): ?> - <a href="index.php?action=monitoring">Monitoring</a><?php endif ?>
     </footer>
 
 </body>
