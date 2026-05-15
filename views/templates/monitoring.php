@@ -11,13 +11,13 @@
     <?php foreach ($articles as $article) { ?>
         <div class="articleLine">
             <div class="title"><?= $article->getTitle() ?></div>
-            <div class="content">Vues : <?= $article->getViewCount() ?></div>
-            <div class="content">Commentaires : <?= $article->getCommentCount() ?></div>
-            <div class="content"><span class="info"> Publié le <?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></span></div>
-            <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=<?= $article->getId() ?>">Modifier</a></div>
-            <div><a class="submit" href="index.php?action=deleteArticle&id=<?= $article->getId() ?>" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?") ?> >Supprimer</a></div>
+            <div class="articleBlock">
+                <div class="content">Vues : <?= $article->getViewCount() ?></div>
+                <div class="content">Commentaires : <?= $article->getCommentCount() ?></div>
+                <div class="content"><span class="info"> Publié le <?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></span></div>
+                <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=<?= $article->getId() ?>">Modifier</a></div>
+                <div><a class="submit" href="index.php?action=deleteArticle&id=<?= $article->getId() ?>" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?") ?> >Supprimer</a></div>
+            </div>
         </div>
     <?php } ?>
 </div>
-
-<a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>
