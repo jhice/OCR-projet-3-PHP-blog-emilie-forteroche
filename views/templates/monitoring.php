@@ -1,23 +1,30 @@
-<?php 
-    /** 
-     * Affichage de la partie admin : liste des articles pour monitoring.
-     * Avec titre, nombre de vues, le nombre de commentaires, la date de publication de l’article.
-     */
+<?php
+
+/** 
+ * Affichage de la partie admin : liste des articles pour monitoring.
+ * Avec titre, nombre de vues, le nombre de commentaires, la date de publication de l’article.
+ */
 ?>
 
 <h2>Monitoring des articles</h2>
 
-<div class="adminArticle">
-    <?php foreach ($articles as $article) { ?>
-        <div class="articleLine">
-            <div class="title"><?= $article->getTitle() ?></div>
-            <div class="articleBlock">
-                <div class="content">Vues : <?= $article->getViewCount() ?></div>
-                <div class="content">Commentaires : <?= $article->getCommentCount() ?></div>
-                <div class="content"><span class="info"> Publié le <?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></span></div>
-                <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=<?= $article->getId() ?>">Modifier</a></div>
-                <div><a class="submit" href="index.php?action=deleteArticle&id=<?= $article->getId() ?>" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?") ?> >Supprimer</a></div>
-            </div>
-        </div>
-    <?php } ?>
-</div>
+<table class="adminArticle">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th class="number">Vues</th>
+            <th class="number">Commentaires</th>
+            <th>Publié le</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($articles as $article) { ?>
+            <tr class="tableLine">
+                <td><?= $article->getTitle() ?></td>
+                <td class="number"><?= $article->getViewCount() ?></td>
+                <td class="number"><?= $article->getCommentCount() ?></td>
+                <td><span class=""><?= Utils::convertDateToShortFrenchFormat($article->getDateCreation()) ?></span></td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>

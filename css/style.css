@@ -350,7 +350,23 @@ a.info {
     padding: 20px;
 }
 
-.articleBlock {}
+.articleBlock {
+    display: flex;
+    align-items: center;
+}
+
+table.adminArticle th, table.adminArticle td {
+    padding: 1em;
+    text-align: left;
+}
+
+table.adminArticle .number {
+    text-align: center;
+}
+
+table.adminArticle .tableLine:nth-child(odd) {
+    background-color: var(--commentPaleColorAlt);
+}
 
 /** 
  * Footer global de la page.
