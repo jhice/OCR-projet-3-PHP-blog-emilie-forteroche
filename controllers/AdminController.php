@@ -192,10 +192,18 @@ class AdminController
         $articleManager = new ArticleManager();
         $articles = $articleManager->getAllArticles();
 
+        // Récupération des infos pour le tri : colonne et sens
+        $sortColumn = $_GET['colonne'] ?? 'titre';
+        $sortOrder = $_GET['sens'] ?? 'asc';
+        // On tri les articles
+        $sortedArticles = $articleManager->sortArticles($articles, $sortColumn, $sortOrder);
+
         // On affiche la page d'administration.
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles
+            'articles' => $sortedArticles,
+            'sortColumn' => $sortColumn,
+            'sortOrder' => $sortOrder,
         ]);
     }
 }

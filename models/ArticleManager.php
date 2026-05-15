@@ -3,6 +3,10 @@
 /**
  * Classe qui gère les articles.
  */
+
+// fonctions de tri
+require_once "./services/functions.php";
+
 class ArticleManager extends AbstractEntityManager
 {
     /**
@@ -117,5 +121,33 @@ class ArticleManager extends AbstractEntityManager
         $this->db->query($sql, [
             'id' => $article->getId()
         ]);
+    }
+
+    /**
+     * Tri des articles
+     * 
+     * @param array $articles Articles à trier
+     * @param string $sortColumn Colonne de tri
+     * @param string $sortOrder Sens du tri
+     */
+    public function sortArticles(array $articles, string $sortColumn, string $sortOrder)
+    {
+        // validation des filtres
+        // colonne valide ?
+        if (!in_array($sortColumn, ["titre", "vues", "commentaires", "publication"])) {
+            $sortColumn = "titre";
+        }
+        // sens valide ?
+        if (!in_array($sortOrder, ["asc", "desc"])) {
+            $sortOrder = "asc";
+        }
+
+        // print_r($articles);
+
+        // Trie et affiche le tableau résultant
+        // appel dynamique sur des fonctions à la racinde de PHP
+        uasort($articles, $sortColumn.ucfirst($sortOrder));
+
+        return $articles;
     }
 }

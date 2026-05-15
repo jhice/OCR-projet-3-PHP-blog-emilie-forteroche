@@ -11,10 +11,26 @@
 <table class="adminArticle">
     <thead>
         <tr>
-            <th>Titre</th>
-            <th class="number">Vues</th>
-            <th class="number">Commentaires</th>
-            <th>Publié le</th>
+            <th>
+                <a href="?action=monitoring&colonne=titre&sens=<?= View::getOrder("titre", $sortColumn, $sortOrder) ?>">
+                    Titre<?= View::getEmoji("titre", $sortColumn, $sortOrder) ?>
+                </a>
+            </th>
+            <th class="number">
+                <a href="?action=monitoring&colonne=vues&sens=<?= View::getOrder("vues", $sortColumn, $sortOrder) ?>">
+                    Vues<?= View::getEmoji("vues", $sortColumn, $sortOrder) ?>
+                </a>
+            </th>
+            <th class="number">
+                <a href="?action=monitoring&colonne=commentaires&sens=<?= View::getOrder("commentaires", $sortColumn, $sortOrder) ?>">
+                    Commentaires<?= View::getEmoji("commentaires", $sortColumn, $sortOrder) ?>
+                </a>
+            </th>
+            <th>
+                <a href="?action=monitoring&colonne=publication&sens=<?= View::getOrder("publication", $sortColumn, $sortOrder) ?>">
+                    Publié le<?= View::getEmoji("publication", $sortColumn, $sortOrder) ?>
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>

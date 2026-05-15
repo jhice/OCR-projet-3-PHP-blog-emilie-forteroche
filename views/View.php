@@ -66,6 +66,44 @@ class View
     {
         return TEMPLATE_VIEW_PATH . $viewName . '.php';
     }
+
+    /**
+     * Retourne l'emoji up ou down pour le tri monitoring
+     */
+    public static function getEmoji(string $column, string $sortColumn, string $sortOrder)
+    {
+        // Si pas la bonne colonne, on retourne vide
+        if ($column !== $sortColumn) {
+            return "";
+        }
+
+        // Retour emoji selon sort order
+        if ($sortOrder === "asc") {
+            return " ⬆️";
+        }
+        if ($sortOrder === "desc") {
+            return " ⬇️";
+        }
+    }
+
+    /**
+     * Retourne la direction asc ou desc pour le tri monitoring
+     */
+    public static function getOrder(string $column, string $sortColumn, string $sortOrder)
+    {
+        // Si pas la bonne colonne, on retourne asc
+        if ($column !== $sortColumn) {
+            return "asc";
+        }
+
+        // Retour ordre inversé
+        if ($sortOrder === "asc") {
+            return "desc";
+        }
+        if ($sortOrder === "desc") {
+            return "asc";
+        }
+    }
 }
 
 

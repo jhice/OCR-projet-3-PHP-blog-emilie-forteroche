@@ -360,6 +360,10 @@ table.adminArticle th, table.adminArticle td {
     text-align: left;
 }
 
+table.adminArticle th a {
+    text-decoration: underline;
+}
+
 table.adminArticle .number {
     text-align: center;
 }
