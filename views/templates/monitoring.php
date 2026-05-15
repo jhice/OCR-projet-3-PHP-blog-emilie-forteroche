@@ -6,7 +6,7 @@
  */
 ?>
 
-<h2>Monitoring des articles, vues et commentaires</h2>
+<h2>Monitoring des articles, vues et commentaires <a href="?action=admin" class="header-link">[aller à l'admin]</a></h2>
 
 <table class="adminArticle">
     <thead>

@@ -27,6 +27,11 @@
 /**
  * Valeur par défaut pour les balises.
  */
+
+html {
+    overflow-y: scroll;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -323,7 +328,7 @@ a.info {
 .articleLine {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--backgroundColor);
+    /* border: 1px solid var(--backgroundColor); */
 }
 
 .articleLine:nth-child(even) {
@@ -355,6 +360,8 @@ a.info {
     align-items: center;
 }
 
+/* table */
+
 table.adminArticle th, table.adminArticle td {
     padding: 1em;
     text-align: left;
@@ -370,6 +377,13 @@ table.adminArticle .number {
 
 table.adminArticle .tableLine:nth-child(odd) {
     background-color: var(--commentPaleColorAlt);
+}
+
+/* h2 link */
+.header-link {
+    font-size: 0.8em;
+    font-style: italic;
+    text-decoration: underline;
 }
 
 /** 

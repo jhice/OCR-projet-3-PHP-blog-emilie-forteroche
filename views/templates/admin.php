@@ -5,7 +5,7 @@
      */
 ?>
 
-<h2>Edition des articles</h2>
+<h2>Edition des articles <a href="?action=monitoring" class="header-link">[aller au monitoring]</a></h2>
 
 <a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>
 
