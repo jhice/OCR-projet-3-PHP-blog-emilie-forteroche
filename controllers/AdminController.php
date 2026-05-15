@@ -160,7 +160,6 @@ class AdminController
         Utils::redirect("admin");
     }
 
-
     /**
      * Suppression d'un article.
      * @return void
@@ -205,5 +204,68 @@ class AdminController
             'sortColumn' => $sortColumn,
             'sortOrder' => $sortOrder,
         ]);
+    }
+
+    /**
+     * Affichage les commentaires d'un article.
+     * @return void
+     */
+    public function showArticleComments(): void
+    {
+        $this->checkIfUserIsConnected();
+
+        // On récupère l'id de l'article s'il existe.
+        $id = Utils::request("articleId", -1);
+
+        // On récupère l'article associé.
+        $articleManager = new ArticleManager();
+        $article = $articleManager->getArticleById($id);
+
+        // Si l'article n'existe pas, erreur
+        if (!$article) {
+            throw new Exception("L'article demandé n'existe pas.");
+        }
+
+        // On va chercher les commentaires
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getAllCommentsByArticleId($id);
+
+        // On affiche la page de modification de l'article.
+        $view = new View("Edition d'un article");
+        $view->render("viewComments", [
+            'article' => $article,
+            'comments' => $comments,
+        ]);
+    }
+
+    /**
+     * Suppression d'un commentaire.
+     * @return void
+     */
+    public function deleteComment(): void
+    {
+        $this->checkIfUserIsConnected();
+
+        $id = Utils::request("id", -1);
+
+        // On récupère le commentaire.
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getCommentById($id);
+
+        // Si le commentaire n'existe pas, erreur
+        if (!$comment) {
+            throw new Exception("Le commebtaire demandé n'existe pas.");
+        }
+        
+        // On supprime le commentaire
+        $commentManager->deleteComment($comment);
+
+        // On met à jour le nombre de commentaires
+        $articleManager = new ArticleManager();
+        // On transmet l'article du commentaire
+        $articleManager->updateCommentCount($articleManager->getArticleById($comment->getIdArticle()));
+
+        // On redirige vers l'article d'origine
+        Utils::redirect("viewComments&articleId=" . $comment->getIdArticle());
     }
 }

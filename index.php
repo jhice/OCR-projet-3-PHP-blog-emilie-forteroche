@@ -73,9 +73,20 @@ try {
             $adminController = new AdminController();
             $adminController->deleteArticle();
             break;
+
         case 'monitoring': 
             $adminController = new AdminController();
             $adminController->showMonitoring();
+            break;
+
+        case 'viewComments':
+            $adminController = new AdminController();
+            $adminController->showArticleComments();
+            break;
+
+        case 'deleteComment':
+            $adminController = new AdminController();
+            $adminController->deleteComment();
             break;
 
         default:

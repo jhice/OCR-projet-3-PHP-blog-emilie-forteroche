@@ -84,7 +84,8 @@ class Utils
         $finalString = "";
         foreach ($lines as $line) {
             if (trim($line) != "") {
-                $finalString .= "<p>$line</p>";
+                $finalString .= nl2br(nl2br($line));
+                // $finalString .= "<p>$line</p>";
             }
         }
 

@@ -6,7 +6,7 @@
  */
 ?>
 
-<h2>Monitoring des articles</h2>
+<h2>Monitoring des articles, vues et commentaires</h2>
 
 <table class="adminArticle">
     <thead>
@@ -38,7 +38,7 @@
             <tr class="tableLine">
                 <td><?= $article->getTitle() ?></td>
                 <td class="number"><?= $article->getViewCount() ?></td>
-                <td class="number"><?= $article->getCommentCount() ?></td>
+                <td class="number"><?= $article->getCommentCount() ?> <a href="?action=viewComments&articleId=<?= $article->getId() ?>">💬</a></td>
                 <td><span class=""><?= Utils::convertDateToShortFrenchFormat($article->getDateCreation()) ?></span></td>
             </tr>
         <?php } ?>
