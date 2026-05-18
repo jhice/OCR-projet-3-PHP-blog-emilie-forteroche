@@ -130,6 +130,7 @@ class ArticleManager extends AbstractEntityManager
     public function sortArticles(array $articles, string $sortColumn, string $sortOrder)
     {
         // validation des filtres
+
         // colonne valide ?
         if (!in_array($sortColumn, ["titre", "vues", "commentaires", "publication"])) {
             $sortColumn = "titre";
@@ -138,13 +139,32 @@ class ArticleManager extends AbstractEntityManager
         if (!in_array($sortOrder, ["asc", "desc"])) {
             $sortOrder = "asc";
         }
+        // conversion colonne front / getter back
+        // (pour ne pas exposer les noms des colonnes)
+        $columnTranslation = [
+            "titre" => "getTitle",
+            "vues" => "getViewCount",
+            "commentaires" => "getCommentCount",
+            "publication" => "getDateCreation",
+        ];
+        $sortGetter = $columnTranslation[$sortColumn];
 
-        // print_r($articles);
-
-        // Trie les données dynamiquement (classe /services/Sort)
-        // @link https://www.php.net/manual/en/function.usort.php#function.usort.examples.object
-        uasort($articles, [Sort::class, $sortColumn.ucfirst($sortOrder)]);
-
+        // Trie les données dynamiquement
+        // Fonction de callback avec use pour transmettre des arguments supplémentaires
+        usort($articles, function ($a, $b) use ($sortGetter, $sortOrder) {
+            // Si même valeur pour la colonne, pas de tri
+            if ($a->$sortGetter() === $b->$sortGetter()) {
+                return 0;
+            }
+            if ($sortOrder === "asc") {
+                // tri ascendant
+                return ($a->$sortGetter() < $b->$sortGetter()) ? -1 : 1;
+                } else {
+                // tri descendant
+                return ($a->$sortGetter() > $b->$sortGetter()) ? -1 : 1;
+            }
+        });
+        
         return $articles;
     }
 }
