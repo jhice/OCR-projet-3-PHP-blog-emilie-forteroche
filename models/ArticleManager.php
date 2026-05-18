@@ -4,9 +4,6 @@
  * Classe qui gère les articles.
  */
 
-// fonctions de tri
-require_once "./services/functions.php";
-
 class ArticleManager extends AbstractEntityManager
 {
     /**
@@ -144,9 +141,9 @@ class ArticleManager extends AbstractEntityManager
 
         // print_r($articles);
 
-        // Trie et affiche le tableau résultant
-        // appel dynamique sur des fonctions à la racinde de PHP
-        uasort($articles, $sortColumn.ucfirst($sortOrder));
+        // Trie les données dynamiquement (classe /services/Sort)
+        // @link https://www.php.net/manual/en/function.usort.php#function.usort.examples.object
+        uasort($articles, [Sort::class, $sortColumn.ucfirst($sortOrder)]);
 
         return $articles;
     }
